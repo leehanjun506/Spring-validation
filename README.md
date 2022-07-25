@@ -51,7 +51,9 @@
 ---
 ## Bean Validation - HTTP 메시지 컨버터
 ### @ModelAttribute 는 HTTP 요청 파라미터(URL 쿼리 스트링, POST Form)를 다룰 때 사용한다.
+### 메시지 컨버터의 작동이 성공해서 객체를 만들어야 @Valid, @Validated가 적용된다.
 ### @RequestBody 는 HTTP Body의 데이터를 객체로 변환할 때 사용한다. 주로 API JSON 요청을 다룰 때 사용한다
+### @RequestBody는 HttpMessageConverter 단계에서 JSON 데이터를 객체로 변경하지 못하면 이후 단계 자체가 진행되지 않고 예외 발생한다. 따라서 컨트롤러도 호출되지 않고, Validator도 적용할 수 없다.
 </br>
 
 ### API의 경우 3가지 경우를 나누어 생각해야 한다.
