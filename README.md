@@ -60,3 +60,26 @@
 1. 성공 요청: 성공
 2. 실패 요청: JSON을 객체로 생성하는 것 자체가 실패함
 3. 검증 오류 요청: JSON을 객체로 생성하는 것은 성공했고, 검증에서 실패함
+4. 
+'''java
+@Slf4j
+@RestController
+@RequestMapping("/validation/api/items")
+public class ValidationItemApiController {
+
+    @PostMapping("/add")
+    public Object addItem(@RequestBody @Validated ItemSaveForm form, BindingResult bindingResult) {
+
+        log.info("API 컨트롤러 호출");
+
+        if (bindingResult.hasErrors()) {
+            log.info("검증 오류 발생 errors={}", bindingResult);
+            return bindingResult.getAllErrors();
+
+        }
+
+        log.info("성공 로직 실행");
+        return form;
+    }
+}
+'''
